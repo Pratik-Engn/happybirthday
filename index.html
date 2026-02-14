@@ -1,126 +1,225 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Something Special Is Coming...</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: black;
-      color: white;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<title>For Sia</title>
 
-    #countdown-container {
-      position: absolute;
-      top: 40%;
-      width: 100%;
-      z-index: 10;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    overflow-x: hidden;
+}
 
-    h1 {
-      font-size: 28px;
-      font-weight: 300;
-      letter-spacing: 2px;
-    }
+/* ---------------- COUNTDOWN PAGE ---------------- */
 
-    #countdown {
-      font-size: 48px;
-      margin-top: 20px;
-      font-weight: bold;
-    }
+#countdownPage {
+    background: black;
+    color: white;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
 
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
+#countdownCenter {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    z-index: 5;
+}
 
-    /* Cat Cursor */
-    body {
-      cursor: url('cat.png'), auto;
-    }
-  </style>
+#countdownCenter h1 {
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+#countdown {
+    font-size: 40px;
+    margin-top: 15px;
+}
+
+/* Mountain silhouette */
+.mountains {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, #111 40%, transparent);
+    clip-path: polygon(
+        0% 100%, 10% 70%, 20% 85%, 30% 60%,
+        40% 80%, 50% 55%, 60% 75%, 70% 60%,
+        80% 85%, 90% 65%, 100% 100%
+    );
+    z-index: 2;
+}
+
+/* Running cats */
+.cat {
+    position: absolute;
+    bottom: 20px;
+    width: 40px;
+    animation: run linear infinite;
+    z-index: 3;
+    filter: brightness(1.5);
+}
+
+@keyframes run {
+    from { left: -50px; }
+    to { left: 110%; }
+}
+
+/* Rain */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* ---------------- BIRTHDAY PAGE ---------------- */
+
+#birthdayPage {
+    display: none;
+    min-height: 100vh;
+    text-align: center;
+    padding: 60px 20px;
+    background-image: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946');
+    background-size: cover;
+    background-position: center;
+    color: #222;
+}
+
+#birthdayPage h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+#birthdayPage h2 {
+    font-weight: 400;
+}
+
+.gallery img {
+    width: 80%;
+    max-width: 400px;
+    margin: 20px 0;
+    border-radius: 15px;
+}
+
+.fadeIn {
+    animation: fade 2s ease-in;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
 </head>
+
 <body>
 
-<div id="countdown-container">
-  <h1>Something Beautiful Is Coming...</h1>
-  <div id="countdown"></div>
+<!-- COUNTDOWN PAGE -->
+<div id="countdownPage">
+    <div id="countdownCenter">
+        <h1>Something Beautiful Is Coming...</h1>
+        <div id="countdown"></div>
+    </div>
+
+    <canvas id="rain"></canvas>
+    <div class="mountains"></div>
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat_silhouette.svg/512px-Cat_silhouette.svg.png"
+         class="cat" style="animation-duration: 20s;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat_silhouette.svg/512px-Cat_silhouette.svg.png"
+         class="cat" style="animation-duration: 25s; animation-delay: 5s;">
 </div>
 
-<canvas id="rain"></canvas>
+<!-- BIRTHDAY PAGE -->
+<div id="birthdayPage" class="fadeIn">
+    <h1>Happy Birthday Siya</h1>
+    <h2>Wish you a very happy birthday</h2>
+    <p>Wish you all the success and peace in life.</p>
+
+    <div class="gallery">
+        <img src="photos/photo1.jpg">
+        <img src="photos/photo2.jpg">
+        <img src="photos/photo3.jpg">
+    </div>
+</div>
 
 <script>
-  // Countdown
-  const targetDate = new Date("Feb 17, 2026 00:00:00").getTime();
 
-  const x = setInterval(function() {
+/* --------- SET DATE HERE --------- */
+const targetDate = new Date("February 17, 2026 00:00:00").getTime();
+/* For preview change to past date */
+
+setInterval(function() {
+
     const now = new Date().getTime();
     const distance = targetDate - now;
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
 
     document.getElementById("countdown").innerHTML =
-      days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s";
 
     if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("countdown-container").innerHTML =
-        "<h1>Happy Birthday 🤍</h1>";
+        document.getElementById("countdownPage").style.display = "none";
+        document.getElementById("birthdayPage").style.display = "block";
     }
-  }, 1000);
+
+}, 1000);
 
 
-  // Rain Effect
-  const canvas = document.getElementById("rain");
-  const ctx = canvas.getContext("2d");
+/* Rain Effect */
+const canvas = document.getElementById("rain");
+const ctx = canvas.getContext("2d");
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-  const rainDrops = [];
+const rainDrops = [];
 
-  for (let i = 0; i < 500; i++) {
+for (let i = 0; i < 400; i++) {
     rainDrops.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      length: Math.random() * 20
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        length: Math.random() * 20
     });
-  }
+}
 
-  function drawRain() {
+function drawRain() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "rgba(174,194,224,0.5)";
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(255,255,255,0.3)";
     ctx.beginPath();
 
     for (let i = 0; i < rainDrops.length; i++) {
-      let r = rainDrops[i];
-      ctx.moveTo(r.x, r.y);
-      ctx.lineTo(r.x, r.y + r.length);
+        let r = rainDrops[i];
+        ctx.moveTo(r.x, r.y);
+        ctx.lineTo(r.x, r.y + r.length);
     }
 
     ctx.stroke();
     moveRain();
-  }
+}
 
-  function moveRain() {
+function moveRain() {
     for (let i = 0; i < rainDrops.length; i++) {
-      let r = rainDrops[i];
-      r.y += 15;
-      if (r.y > canvas.height) {
-        r.y = -20;
-        r.x = Math.random() * canvas.width;
-      }
+        let r = rainDrops[i];
+        r.y += 15;
+        if (r.y > canvas.height) {
+            r.y = -20;
+            r.x = Math.random() * canvas.width;
+        }
     }
-  }
+}
 
-  setInterval(drawRain, 30);
+setInterval(drawRain, 30);
+
 </script>
 
 </body>
