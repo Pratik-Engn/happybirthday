@@ -7,151 +7,55 @@
 <style>
 body {
     margin: 0;
-    font-family: Georgia, serif;
-    overflow-x: hidden;
-}
-
-/* ---------------- COUNTDOWN PAGE ---------------- */
-
-#countdownPage {
     background: black;
     color: white;
-    height: 100vh;
+    font-family: Georgia, serif;
     text-align: center;
-    position: relative;
     overflow: hidden;
 }
 
-#countdownCenter {
+/* Center Content */
+#center {
     position: absolute;
     top: 35%;
     width: 100%;
-    z-index: 5;
 }
 
-#countdownCenter h1 {
+/* Sleeping GIF */
+#sleepGif {
+    width: 220px;
+    margin-bottom: 20px;
+}
+
+/* Text */
+#message {
+    font-size: 22px;
+    letter-spacing: 1px;
     font-weight: 300;
-    letter-spacing: 2px;
 }
 
+/* Countdown */
 #countdown {
-    font-size: 38px;
+    font-size: 40px;
     margin-top: 15px;
-}
-
-/* Tom & Jerry GIF */
-#tomjerry {
-    width: 200px;
-    margin-top: 20px;
-}
-
-/* Mountain silhouette */
-.mountains {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(to top, #111 50%, transparent);
-    clip-path: polygon(
-        0% 100%, 10% 70%, 20% 85%, 30% 60%,
-        40% 80%, 50% 55%, 60% 75%, 70% 60%,
-        80% 85%, 90% 65%, 100% 100%
-    );
-    z-index: 2;
-}
-
-/* Running Cats */
-.cat {
-    position: absolute;
-    bottom: 20px;
-    width: 40px;
-    animation: run linear infinite;
-    z-index: 3;
-    filter: brightness(2);
-}
-
-@keyframes run {
-    from { left: -50px; }
-    to { left: 110%; }
-}
-
-/* Snow Canvas */
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-/* ---------------- BIRTHDAY PAGE ---------------- */
-
-#birthdayPage {
-    display: none;
-    min-height: 100vh;
-    text-align: center;
-    padding: 60px 20px;
-    background-image: url('./flowers.jpg');
-    background-size: cover;
-    background-position: center;
-    color: #222;
-}
-
-#birthdayPage h1 {
-    font-size: 42px;
-    margin-bottom: 10px;
-}
-
-#birthdayPage h2 {
-    font-weight: 400;
-}
-
-.gallery img {
-    width: 80%;
-    max-width: 400px;
-    margin: 20px 0;
-    border-radius: 15px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- COUNTDOWN PAGE -->
-<div id="countdownPage">
-    <div id="countdownCenter">
-        <h1>Something Beautiful Is Coming...</h1>
-        <div id="countdown"></div>
-        <img src="./tomjerry.gif" id="tomjerry">
-    </div>
-
-    <canvas id="snow"></canvas>
-    <div class="mountains"></div>
-
-    <!-- White Cats -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat_silhouette.svg/512px-Cat_silhouette.svg.png"
-         class="cat" style="animation-duration: 25s;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat_silhouette.svg/512px-Cat_silhouette.svg.png"
-         class="cat" style="animation-duration: 30s; animation-delay: 8s;">
-</div>
-
-<!-- BIRTHDAY PAGE -->
-<div id="birthdayPage">
-    <h1>Happy Birthday Siya</h1>
-    <h2>Wish you a very happy birthday</h2>
-    <p>Wish you all the success and peace in life.</p>
-
-    <div class="gallery">
-        <img src="photos/photo1.jpg">
-        <img src="photos/photo2.jpg">
-        <img src="photos/photo3.jpg">
-    </div>
+<div id="center">
+    <img src="./Vivi.gif" id="sleepGif">
+    <div id="message">Let me sleep until...</div>
+    <div id="countdown"></div>
 </div>
 
 <script>
 
-/* --------- SET DATE HERE --------- */
+/* SET TARGET DATE */
 const targetDate = new Date("February 17, 2026 00:00:00").getTime();
-/* Change to past date to preview birthday page */
+
+/* Change to past date to test */
 
 setInterval(function() {
 
@@ -166,61 +70,7 @@ setInterval(function() {
     document.getElementById("countdown").innerHTML =
         days + "d " + hours + "h " + minutes + "m " + seconds + "s";
 
-    if (distance < 0) {
-        document.getElementById("countdownPage").style.display = "none";
-        document.getElementById("birthdayPage").style.display = "block";
-    }
-
 }, 1000);
-
-
-/* Snowfall Effect (Slow & Calm) */
-
-const canvas = document.getElementById("snow");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const snowflakes = [];
-
-for (let i = 0; i < 200; i++) {
-    snowflakes.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 3,
-        speed: Math.random() * 1 + 0.5
-    });
-}
-
-function drawSnow() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    ctx.beginPath();
-
-    for (let i = 0; i < snowflakes.length; i++) {
-        let s = snowflakes[i];
-        ctx.moveTo(s.x, s.y);
-        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2, true);
-    }
-
-    ctx.fill();
-    moveSnow();
-}
-
-function moveSnow() {
-    for (let i = 0; i < snowflakes.length; i++) {
-        let s = snowflakes[i];
-        s.y += s.speed;
-
-        if (s.y > canvas.height) {
-            s.y = 0;
-            s.x = Math.random() * canvas.width;
-        }
-    }
-}
-
-setInterval(drawSnow, 30);
 
 </script>
 
