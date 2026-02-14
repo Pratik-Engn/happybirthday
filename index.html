@@ -24,7 +24,7 @@ body {
 
 #countdownCenter {
     position: absolute;
-    top: 40%;
+    top: 35%;
     width: 100%;
     z-index: 5;
 }
@@ -35,8 +35,14 @@ body {
 }
 
 #countdown {
-    font-size: 40px;
+    font-size: 38px;
     margin-top: 15px;
+}
+
+/* Tom & Jerry GIF */
+#tomjerry {
+    width: 200px;
+    margin-top: 20px;
 }
 
 /* Mountain silhouette */
@@ -45,7 +51,7 @@ body {
     bottom: 0;
     width: 100%;
     height: 200px;
-    background: linear-gradient(to top, #111 40%, transparent);
+    background: linear-gradient(to top, #111 50%, transparent);
     clip-path: polygon(
         0% 100%, 10% 70%, 20% 85%, 30% 60%,
         40% 80%, 50% 55%, 60% 75%, 70% 60%,
@@ -54,14 +60,14 @@ body {
     z-index: 2;
 }
 
-/* Running cats */
+/* Running Cats */
 .cat {
     position: absolute;
     bottom: 20px;
     width: 40px;
     animation: run linear infinite;
     z-index: 3;
-    filter: brightness(1.5);
+    filter: brightness(2);
 }
 
 @keyframes run {
@@ -69,7 +75,7 @@ body {
     to { left: 110%; }
 }
 
-/* Rain */
+/* Snow Canvas */
 canvas {
     position: absolute;
     top: 0;
@@ -84,14 +90,14 @@ canvas {
     min-height: 100vh;
     text-align: center;
     padding: 60px 20px;
-    background-image: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946');
+    background-image: url('./flowers.jpg');
     background-size: cover;
     background-position: center;
     color: #222;
 }
 
 #birthdayPage h1 {
-    font-size: 40px;
+    font-size: 42px;
     margin-bottom: 10px;
 }
 
@@ -105,15 +111,6 @@ canvas {
     margin: 20px 0;
     border-radius: 15px;
 }
-
-.fadeIn {
-    animation: fade 2s ease-in;
-}
-
-@keyframes fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
 </style>
 </head>
 
@@ -124,19 +121,21 @@ canvas {
     <div id="countdownCenter">
         <h1>Something Beautiful Is Coming...</h1>
         <div id="countdown"></div>
+        <img src="./tomjerry.gif" id="tomjerry">
     </div>
 
-    <canvas id="rain"></canvas>
+    <canvas id="snow"></canvas>
     <div class="mountains"></div>
 
+    <!-- White Cats -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat_silhouette.svg/512px-Cat_silhouette.svg.png"
-         class="cat" style="animation-duration: 20s;">
+         class="cat" style="animation-duration: 25s;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat_silhouette.svg/512px-Cat_silhouette.svg.png"
-         class="cat" style="animation-duration: 25s; animation-delay: 5s;">
+         class="cat" style="animation-duration: 30s; animation-delay: 8s;">
 </div>
 
 <!-- BIRTHDAY PAGE -->
-<div id="birthdayPage" class="fadeIn">
+<div id="birthdayPage">
     <h1>Happy Birthday Siya</h1>
     <h2>Wish you a very happy birthday</h2>
     <p>Wish you all the success and peace in life.</p>
@@ -151,8 +150,8 @@ canvas {
 <script>
 
 /* --------- SET DATE HERE --------- */
-const targetDate = new Date("January 1, 2024 00:00:00").getTime();
-/* For preview change to past date */
+const targetDate = new Date("February 17, 2026 00:00:00").getTime();
+/* Change to past date to preview birthday page */
 
 setInterval(function() {
 
@@ -175,55 +174,55 @@ setInterval(function() {
 }, 1000);
 
 
-/* Rain Effect */
-const canvas = document.getElementById("rain");
+/* Snowfall Effect (Slow & Calm) */
+
+const canvas = document.getElementById("snow");
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const rainDrops = [];
+const snowflakes = [];
 
-for (let i = 0; i < 400; i++) {
-    rainDrops.push({
+for (let i = 0; i < 200; i++) {
+    snowflakes.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        length: Math.random() * 20
+        radius: Math.random() * 3,
+        speed: Math.random() * 1 + 0.5
     });
 }
 
-function drawRain() {
+function drawSnow() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = "rgba(255,255,255,0.3)";
+    ctx.fillStyle = "white";
     ctx.beginPath();
 
-    for (let i = 0; i < rainDrops.length; i++) {
-        let r = rainDrops[i];
-        ctx.moveTo(r.x, r.y);
-        ctx.lineTo(r.x, r.y + r.length);
+    for (let i = 0; i < snowflakes.length; i++) {
+        let s = snowflakes[i];
+        ctx.moveTo(s.x, s.y);
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2, true);
     }
 
-    ctx.stroke();
-    moveRain();
+    ctx.fill();
+    moveSnow();
 }
 
-function moveRain() {
-    for (let i = 0; i < rainDrops.length; i++) {
-        let r = rainDrops[i];
-        r.y += 15;
-        if (r.y > canvas.height) {
-            r.y = -20;
-            r.x = Math.random() * canvas.width;
+function moveSnow() {
+    for (let i = 0; i < snowflakes.length; i++) {
+        let s = snowflakes[i];
+        s.y += s.speed;
+
+        if (s.y > canvas.height) {
+            s.y = 0;
+            s.x = Math.random() * canvas.width;
         }
     }
 }
 
-setInterval(drawRain, 30);
+setInterval(drawSnow, 30);
 
 </script>
 
 </body>
 </html>
-
-
-
