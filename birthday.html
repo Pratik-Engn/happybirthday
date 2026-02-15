@@ -18,35 +18,57 @@ body {
   overflow: hidden;
 }
 
+/* Dark overlay */
 .overlay {
   background: rgba(0,0,0,0.65);
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
+  min-height: 100vh;
+  padding: 60px 40px;
 }
 
+/* Title */
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 60px;
-  margin-bottom: 25px;
+  font-size: 70px;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-.hero-img {
-  width: 340px;
-  border-radius: 14px;
-  margin: 25px 0;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+/* Main content layout */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  max-width: 1100px;
+  margin: auto;
+  flex-wrap: wrap;
 }
 
-p {
-  font-size: 18px;
-  max-width: 550px;
-  line-height: 1.8;
+/* Photo frame */
+.photo-frame {
+  padding: 15px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+}
+
+.photo-frame img {
+  width: 420px;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Message */
+.message {
+  max-width: 450px;
+  font-size: 20px;
+  line-height: 1.9;
   opacity: 0.95;
+}
+
+.message strong {
+  font-size: 24px;
 }
 
 /* Dandelions */
@@ -71,13 +93,20 @@ canvas {
 
   <h1>Happy Birthday</h1>
 
-  <img src="mainphoto.jpg" class="hero-img">
+  <div class="content">
 
-  <p>
-    Wish you a very happy birthday.  
-    May this year bring you clarity, strength, growth, and quiet peace in everything you choose to do.  
-    Stay the way you are — grounded, genuine, and steady.
-  </p>
+    <div class="photo-frame">
+      <img src="mainphoto.jpg">
+    </div>
+
+    <div class="message">
+      <strong>Wish you a very happy birthday.</strong><br><br>
+      May this year bring you clarity, strength, growth, and quiet peace in everything you choose to do.  
+      May you continue to become stronger, calmer, and more unstoppable in your own way.  
+      Stay exactly the way you are — grounded, genuine, steady.
+    </div>
+
+  </div>
 
 </div>
 
