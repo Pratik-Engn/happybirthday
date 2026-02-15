@@ -45,6 +45,14 @@ h1 {
   margin-bottom: 50px;
   letter-spacing: 4px;
 }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.content {
+  animation: fadeIn 2.5s ease forwards;
+}
 
 
 /* Main content layout */
@@ -176,6 +184,7 @@ setInterval(drawPetals, 30);
 
 </body>
 </html>
+
 
 
 
