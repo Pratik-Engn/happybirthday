@@ -28,10 +28,24 @@ body {
 /* Title */
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 70px;
+  font-size: 78px;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  background: linear-gradient(to right, #ffffff, #dcdcdc, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeIn 2s ease forwards;
 }
+<p class="subtitle">17th February</p>
+.subtitle {
+  text-align: center;
+  font-size: 18px;
+  opacity: 0.7;
+  margin-bottom: 50px;
+  letter-spacing: 4px;
+}
+
 
 /* Main content layout */
 .content {
@@ -162,5 +176,6 @@ setInterval(drawPetals, 30);
 
 </body>
 </html>
+
 
 
