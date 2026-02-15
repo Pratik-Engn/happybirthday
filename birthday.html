@@ -1,200 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🎂 Happy Birthday Siyaa </title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Happy Birthday Siyaaa</title>
 
 <style>
 
+/* ===== GLOBAL ===== */
 body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: url("background.jpg") no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  cursor: url("cat.png"), auto;
-  overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', serif;
+    background: #0b0f1a;
+    color: white;
+    overflow-x: hidden;
+    cursor: url("cat.png"), auto; /* Your cat PNG */
 }
 
-/* Dark overlay */
-.overlay {
-  background: rgba(0,0,0,0.65);
-  min-height: 100vh;
-  padding: 60px 40px;
+/* ===== BACKGROUND IMAGE ===== */
+.background-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("background.png") center center / cover no-repeat;
+    z-index: -2;
+    opacity: 0.25;
 }
 
-/* Title */
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 78px;
-  text-align: center;
-  margin-bottom: 20px;
-  letter-spacing: 2px;
-  background: linear-gradient(to right, #ffffff, #dcdcdc, #ffffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: fadeIn 2s ease forwards;
-}
-<p class="subtitle">17th February</p>
-.subtitle {
-  text-align: center;
-  font-size: 18px;
-  opacity: 0.7;
-  margin-bottom: 50px;
-  letter-spacing: 4px;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ===== DANDELION EFFECT ===== */
+.dandelion {
+    position: fixed;
+    top: -20px;
+    color: rgba(255,255,255,0.8);
+    font-size: 20px;
+    animation: fall linear infinite;
+    z-index: -1;
 }
 
-.content {
-  animation: fadeIn 4.5s ease forwards;
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
 }
 
-
-/* Main content layout */
-.content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 60px;
-  max-width: 1100px;
-  margin: auto;
-  flex-wrap: wrap;
+/* ===== TITLE ===== */
+.title {
+    text-align: center;
+    font-size: 70px;
+    margin-top: 60px;
+    letter-spacing: 2px;
+    font-weight: 400;
 }
 
-/* Photo frame */
+/* ===== MAIN SECTION ===== */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-top: 60px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+/* ===== PHOTO FRAME ===== */
 .photo-frame {
-  padding: 20px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 20px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-  transition: transform 0.5s ease;
+    padding: 20px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
 }
 
-.photo-frame:hover {
-  transform: scale(1.03);
+.main-photo {
+    width: 500px;
+    max-width: 90%;
+    border-radius: 20px;
+    display: block;
 }
 
-
-/* Message */
-.message {
-  max-width: 450px;
-  font-size: 20px;
-  line-height: 1.9;
-  opacity: 0.95;
+/* ===== WISH TEXT ===== */
+.wish-text {
+    max-width: 450px;
+    font-size: 22px;
+    line-height: 1.7;
+    font-weight: 300;
 }
 
-.message strong {
-  font-size: 24px;
-}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .title {
+        font-size: 45px;
+    }
 
-/* Dandelions */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-}
+    .container {
+        flex-direction: column;
+        gap: 30px;
+    }
 
-.overlay::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.8) 100%);
-  top: 0;
-  left: 0;
-  z-index: 1;
+    .wish-text {
+        text-align: center;
+    }
 }
-
 
 </style>
 </head>
 
 <body>
 
-<div class="overlay">
+<div class="background-wrapper"></div>
 
-  <h1>Happy Birthday Siyaa </h1>
+<h1 class="title">Happy Birthday Siyaaa</h1>
 
-  <div class="content">
+<div class="container">
 
     <div class="photo-frame">
-      <img src="mainphoto.jpg">
+        <img src="mainphoto.png" class="main-photo">
     </div>
 
-    <div class="message">
-      <strong>Wish you a very happy birthday.</strong><br><br>
-      May this year bring you clarity, strength, growth, and quiet peace in everything you choose to do.  
-      May you continue to become stronger, calmer, and more unstoppable in your own way.  
-      Stay exactly the way you are — grounded, genuine, steady.
+    <div class="wish-text">
+        <p>
+            Wish you a very happy birthday.  
+            I genuinely hope this year brings you peace, clarity,  
+            success, and everything that aligns with your heart.
+        </p>
+        <p>
+            May your world stay calm, your mind stay strong,  
+            and your smile stay exactly the way it is.
+        </p>
     </div>
-
-  </div>
 
 </div>
 
-<canvas id="petals"></canvas>
-
 <script>
-const canvas = document.getElementById("petals");
-const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+/* ===== DANDELION GENERATOR ===== */
+function createDandelion() {
+    const d = document.createElement("div");
+    d.classList.add("dandelion");
+    d.innerHTML = "✿";
 
-let petals = [];
+    d.style.left = Math.random() * window.innerWidth + "px";
+    d.style.animationDuration = (6 + Math.random() * 6) + "s";
+    d.style.fontSize = (15 + Math.random() * 15) + "px";
 
-for (let i = 0; i < 35; i++) {
-  petals.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 3 + 1,
-    speedY: Math.random() * 0.6 + 0.3,
-    speedX: Math.random() * 0.4 - 0.2
-  });
+    document.body.appendChild(d);
+
+    setTimeout(() => {
+        d.remove();
+    }, 12000);
 }
 
-function drawPetals() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "rgba(255,255,255,0.8)";
-  ctx.beginPath();
+setInterval(createDandelion, 400);
 
-  petals.forEach(p => {
-    ctx.moveTo(p.x, p.y);
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-  });
-
-  ctx.fill();
-  movePetals();
-}
-
-function movePetals() {
-  petals.forEach(p => {
-    p.y += p.speedY;
-    p.x += p.speedX;
-
-    if (p.y > canvas.height) {
-      p.y = 0;
-      p.x = Math.random() * canvas.width;
-    }
-  });
-}
-
-setInterval(drawPetals, 30);
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
