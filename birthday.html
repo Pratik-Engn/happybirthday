@@ -91,10 +91,19 @@ body {
 /* ===== WISH TEXT ===== */
 .wish-text {
     max-width: 450px;
-    font-size: 22px;
-    line-height: 1.7;
+    font-size: 24px;
+    line-height: 1.8;
     font-weight: 300;
+    color: #ffc6da; /* soft baby pink */
+    text-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+    animation: fadeIn 5s ease forwards;
+    opacity: 0;
 }
+
+.wish-text p {
+    margin-bottom: 20px;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -194,6 +203,7 @@ setInterval(createDandelion, 400);
 
 </body>
 </html>
+
 
 
 
